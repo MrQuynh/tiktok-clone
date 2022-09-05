@@ -8,7 +8,7 @@ import styles from './FollowAccount.module.scss';
 
 const cx = classNames.bind(styles);
 
-function FollowAccount({ avatar, name, check, nickName, followers, like }) {
+function FollowAccount({ avatar, id, name, check, nickName, followers, like }) {
     const [follow, setFollow] = useState(false);
 
     const handleClick = () => {
@@ -17,7 +17,7 @@ function FollowAccount({ avatar, name, check, nickName, followers, like }) {
     return (
         <div className={cx('account')}>
             <div className={cx('account-header')}>
-                <Link to={'/@' + nickName}>
+                <Link to={{ pathname: '/@' + nickName, search: 'id=' + id }}>
                     <Image className={cx('avatar', 'large')} src={avatar} />
                 </Link>
 
@@ -32,21 +32,21 @@ function FollowAccount({ avatar, name, check, nickName, followers, like }) {
                 )}
             </div>
             <div className={cx('info-follow')}>
-                <Link to={'/@' + nickName}>
+                <Link to={{ pathname: '/@' + nickName, search: 'id=' + id }}>
                     <h4 className={cx('nick-name', 'bold')}>
                         {nickName} {check && <AiFillCheckCircle className={cx('icon')} />}
                     </h4>
                 </Link>
-                <Link to={'/@' + nickName}>
+                <Link to={{ pathname: '/@' + nickName, search: 'id=' + id }}>
                     <p className={cx('name', 'medium')}>{name}</p>
                 </Link>
                 <div className={cx('vote-body')}>
-                    <strong className={cx('vote')}>{followers}M</strong> Followers
-                    <strong className={cx('vote')}>{like}M</strong> Likes
+                    <strong className={cx('vote')}>{followers}</strong> Followers
+                    <strong className={cx('vote')}>{like}</strong> Likes
                 </div>
             </div>
             <div className={cx('bio')}>
-                <p className={cx('bio-text')}>Contact Instagram - Facebook 📩 Hongmen520@gmail.com</p>
+                <p className={cx('bio-text')}>Contact Instagram - Facebook 📩 {nickName}@gmail.com</p>
             </div>
         </div>
     );

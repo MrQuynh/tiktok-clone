@@ -17,7 +17,7 @@
     }
 
     &.disabled {
-        pointer-events: none;
+        cursor: no-drop;
         opacity: 0.5;
     }
 }
@@ -44,7 +44,7 @@
     }
 }
 
-.priamry {
+.primary {
     color: var(--white);
     background-color: var(--primary);
     border-color: var(--primary);

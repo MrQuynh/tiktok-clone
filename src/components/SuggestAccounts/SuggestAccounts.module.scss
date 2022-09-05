@@ -76,6 +76,7 @@
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     padding: 16px;
     min-width: 310px;
+    z-index: 10;
 }
 .account-header {
     // display: flex;
@@ -106,5 +107,19 @@
 
     &:hover {
         background-color: white;
+    }
+}
+@media (max-width: 740px) {
+    .label,
+    .info,
+    .more-btn {
+        display: none;
+    }
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 12px 0;
     }
 }

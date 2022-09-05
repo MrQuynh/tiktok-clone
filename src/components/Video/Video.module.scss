@@ -1,10 +1,11 @@
 .video {
     padding: 20px 0;
+    border-bottom: 1px solid rgba(22, 24, 35, 0.12);
 }
 
 .wrapper {
     display: flex;
-    justify-content: space-around;
+    // justify-content: space-around;
 }
 .info {
     display: flex;
@@ -87,7 +88,7 @@
     }
 }
 .content-text {
-    width: 100%;
+    width: 80%;
 }
 .btn {
     margin: 10px 0 0 20px;
@@ -96,7 +97,7 @@
 // body
 .body {
     display: flex;
-    // margin: 0 -35px;
+    margin-top: 15px;
 }
 // video
 .body-video {
@@ -115,8 +116,8 @@
     &:hover .pause.play {
         display: block;
     }
-    &:hover .sound-icon {
-        display: block;
+    &:hover .pause-body {
+        display: flex;
     }
 }
 .video {
@@ -125,8 +126,7 @@
     max-height: 600px;
     border-radius: 8px;
 }
-// Play and pause video
-
+// volume control
 .pause {
     display: none;
     position: absolute;
@@ -136,14 +136,24 @@
     top: 86%;
     left: 12px;
 }
-.sound-icon {
-    display: none;
+.pause-body {
     position: absolute;
-    z-index: 1;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    top: 323px;
+    right: -12px;
+}
+
+.volume {
+    display: none;
+}
+.sound-icon {
+    position: absolute;
     color: white;
     font-size: 2rem;
-    top: 88%;
-    right: 17px;
+    top: 77px;
+    right: 26px;
 }
 
 // action
@@ -151,7 +161,6 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-
     width: 80px;
     height: 460px;
     padding-left: 20px;
@@ -165,6 +174,18 @@
 
     &:hover {
         cursor: pointer;
+    }
+}
+.action-icon:nth-child(1):hover {
+    animation: animate alternate 0.5s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.2);
     }
 }
 
@@ -217,4 +238,49 @@
     position: absolute;
     width: 100px;
     height: 40px;
+}
+@media (max-width: 740px) {
+    .wrapper {
+        position: relative;
+    }
+    .body {
+        margin-left: -66px;
+    }
+    .content-text {
+        display: none;
+    }
+    .name-music {
+        padding-top: 15px;
+        margin-left: -66px;
+    }
+    .name-out {
+        display: flex;
+        flex-direction: column;
+    }
+    .btn {
+        position: absolute;
+        right: 55px;
+    }
+}
+@media (max-width: 400px) {
+    .btn {
+        display: none;
+    }
+    .body {
+        margin-top: 20px;
+    }
+    .actions {
+        position: absolute;
+        color: white;
+
+        right: 30px;
+        bottom: 20px;
+    }
+    .action-icon {
+        color: white;
+    }
+    .vote {
+        color: white;
+        margin: 6px;
+    }
 }

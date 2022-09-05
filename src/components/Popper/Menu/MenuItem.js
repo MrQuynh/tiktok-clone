@@ -9,8 +9,21 @@ function MenuItem({ data, onClick }) {
     const classes = cx('menu-item', {
         separate: data.separate,
     });
+    let link = data.to;
+    let handleClick = onClick;
+    if (data.title === 'View profile') {
+        link = '@' + JSON.parse(localStorage.getItem('USER_LOG_IN')).nickname;
+    }
+    if (data.title === 'Log out') {
+        link = '/';
+        handleClick = () => {
+            localStorage.clear();
+            window.location.reload();
+        };
+    }
+
     return (
-        <Button className={classes} leftIcon={data.icon} to={data.to} onClick={onClick}>
+        <Button className={classes} leftIcon={data.icon} to={link} onClick={handleClick}>
             {data.title}
         </Button>
     );

@@ -25,7 +25,8 @@ import Search from '../Search';
 import routesConfig from '~/config/routes';
 import { BsCloudUpload } from 'react-icons/bs';
 import ModalOverlay from '~/components/ModalOverlay';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useStore } from '~/hooks';
 
 const cx = classNames.bind(styles);
 
@@ -59,10 +60,49 @@ const MENU_ITEMS = [
         title: 'Keyboards shortcuts',
     },
 ];
+const userMenu = [
+    {
+        icon: <FontAwesomeIcon icon={faUser} />,
+        title: 'View profile',
+        to: '/quynhhh',
+    },
+    {
+        icon: <FontAwesomeIcon icon={faCoins} />,
+        title: 'Get coins',
+        to: '/coin',
+    },
+    {
+        icon: <FontAwesomeIcon icon={faGear} />,
+        title: 'Settings',
+        to: '/settings',
+    },
+    ...MENU_ITEMS,
+    {
+        icon: <FontAwesomeIcon icon={faSignOut} />,
+        title: 'Log out',
+        // to: '/',
+        separate: true,
+    },
+];
+
+const isLogin = localStorage.getItem('USER_LOG_IN');
+const userLogIn = null;
+const status = false;
+const item = isLogin ? userMenu : MENU_ITEMS;
 
 function Header() {
-    const currentUser = false;
+    const [currentUser, setCurrentUser] = useState({ userLogIn, status });
     const [login, setLogin] = useState(false);
+    // const [item, setItem] = useState(MENU_ITEMS);
+
+    const [state] = useStore();
+    // console.log(state);
+    useEffect(() => {
+        if (state[0]?.userLogIn !== null) {
+            setCurrentUser(state[0]);
+            // setItem(userMenu);
+        }
+    }, [state]);
 
     // handle logic
     const handleMenuChange = (menuItem) => {
@@ -72,30 +112,7 @@ function Header() {
             default:
         }
     };
-    const userMenu = [
-        {
-            icon: <FontAwesomeIcon icon={faUser} />,
-            title: 'View profile',
-            to: '/quynhhh',
-        },
-        {
-            icon: <FontAwesomeIcon icon={faCoins} />,
-            title: 'Get coins',
-            to: '/coin',
-        },
-        {
-            icon: <FontAwesomeIcon icon={faGear} />,
-            title: 'Settings',
-            to: '/settings',
-        },
-        ...MENU_ITEMS,
-        {
-            icon: <FontAwesomeIcon icon={faSignOut} />,
-            title: 'Log out',
-            to: '/logout',
-            separate: true,
-        },
-    ];
+
     const HandleLogin = () => {
         setLogin(true);
     };
@@ -110,15 +127,19 @@ function Header() {
 
                 {/* search */}
 
-                <Search />
+                <div className={cx('search')}>
+                    <Search />
+                </div>
 
                 <div className={cx('actions')}>
-                    {currentUser ? (
+                    {currentUser?.status ? (
                         <>
                             <Tippy delay={[0, 50]} content="Upload Video" placement="bottom">
-                                <button className={cx('action-btn')}>
-                                    <BsCloudUpload />
-                                </button>
+                                <Link to="/upload">
+                                    <button className={cx('action-btn')}>
+                                        <BsCloudUpload />
+                                    </button>
+                                </Link>
                             </Tippy>
                             <Tippy delay={[0, 50]} content="Messages" placement="bottom">
                                 <button className={cx('action-btn')}>
@@ -134,22 +155,30 @@ function Header() {
                         </>
                     ) : (
                         <>
-                            <Button text>Upload</Button>
+                            <Link to="/upload">
+                                <Button text>Upload</Button>
+                            </Link>
                             <Button primary onClick={HandleLogin}>
                                 Log in
                             </Button>
                         </>
                     )}
-                    <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
-                        {currentUser ? (
+                    <Menu items={item} onChange={handleMenuChange}>
+                        {currentUser?.status ? (
+                            // <Link
+                            //     to={{
+                            //         pathname: '/@' + JSON.parse(currentUser?.userLogIn).nickname,
+                            //     }}
+                            // >
                             <Image
-                                src="https://scontent.fdad3-5.fna.fbcdn.net/v/t39.30808-6/279841216_1091212664941555_4727043539452060717_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=4RB0MOg_irsAX9qdhcU&_nc_ht=scontent.fdad3-5.fna&oh=00_AT-zZLb-MWVTqtvdUNvU9Zbn_-7VNKibHfjFvX59Bbrvow&oe=62FCEAC9"
+                                src={JSON.parse(currentUser?.userLogIn).avatar}
                                 className={cx('user-avatar')}
-                                alt="nguyen van a"
+                                // alt={userInfoLogIn.first_name}
                                 // fallback="https://scontent.fdad3-5.fna.fbcdn.net/v/t39.30808-6/279841216_1091212664941555_4727043539452060717_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=4RB0MOg_irsAX9qdhcU&_nc_ht=scontent.fdad3-5.fna&oh=00_AT-zZLb-MWVTqtvdUNvU9Zbn_-7VNKibHfjFvX59Bbrvow&oe=62FCEAC9"
                                 // fallback="https://static.fullstack.edu.vn/static/media/f8-icon.18cd71cfcfa33566a22b.png"
                             />
                         ) : (
+                            // </Link>
                             <button className={cx('more-btn')}>
                                 <FontAwesomeIcon icon={faEllipsisVertical} />
                             </button>

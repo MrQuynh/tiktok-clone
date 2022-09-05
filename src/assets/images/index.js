@@ -1,5 +1,5 @@
 const images = {
-    logo: require('~/assets/images/logo.svg').default,
+    logo: require('~/assets/images/logo1.svg').default,
     noImage: require('~/assets/images/no-image.png'),
     qr: require('~/assets/images/qr.png'),
     qrPhone: require('~/assets/images/tiktok-qr-phone.gif'),
@@ -13,6 +13,8 @@ const images = {
     b4: require('~/assets/images/b4.jpg'),
     b5: require('~/assets/images/b5.jpg'),
     b6: require('~/assets/images/b6.jpg'),
+
+    loading: require('~/assets/images/loading.png'),
 };
 
 export default images;

@@ -18,6 +18,7 @@ function Menu({ children, items = [], onChange = defaultFn, hideOnClick = false 
     const renderItems = () => {
         return current.data.map((item, index) => {
             const isParent = !!item.children;
+            // console.log(item);
             return (
                 <MenuItem
                     key={index}
@@ -54,7 +55,7 @@ function Menu({ children, items = [], onChange = defaultFn, hideOnClick = false 
     return (
         <Tippy
             offset={[12, 8]}
-            delay={[0, 800]}
+            delay={[0, 300]}
             hideOnClick={hideOnClick}
             interactive
             placement="bottom-end"

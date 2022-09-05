@@ -1,5 +1,12 @@
 .body {
-    // padding: 24px 0 24px 300px;
+    min-width: 300px;
+    height: 100%;
+    display: block;
+}
+.loading {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 .back-to-top {
     display: none;

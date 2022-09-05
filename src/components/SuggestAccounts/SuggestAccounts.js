@@ -3,26 +3,28 @@ import AccountItem from './AccountItem';
 import PropTypes from 'prop-types';
 
 import styles from './SuggestAccounts.module.scss';
-import Data from '~/FakeData/Data';
 
 const cx = classNames.bind(styles);
 
-function SuggestAccounts({ label }) {
+function SuggestAccounts({ label, data = [], onViewChange, seeMore }) {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('label')}>{label}</div>
 
-            {Data.map((item) => (
-                <AccountItem key={item.id} {...item} />
+            {data.map((user, index) => (
+                <AccountItem key={index} {...user} />
             ))}
 
-            <p className={cx('more-btn')}>See all</p>
+            <p className={cx('more-btn')} onClick={onViewChange}>
+                {seeMore ? 'See more' : 'See less'}
+            </p>
         </div>
     );
 }
 
 SuggestAccounts.propTypes = {
     label: PropTypes.string.isRequired,
+    data: PropTypes.array,
 };
 
 export default SuggestAccounts;

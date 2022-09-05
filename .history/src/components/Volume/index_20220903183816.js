@@ -1,0 +1,22 @@
+import classNames from 'classnames/bind';
+import { useRef } from 'react';
+import styles from './volume.module.scss';
+
+const cx = classNames.bind(styles);
+
+function Volume() {
+    const barRef = useRef();
+    const mouseClick = (e) => {
+        barRef.current.style.transform = 'scale(' + (50 % +')');
+    };
+
+    return (
+        <div className={cx('volume-control')}>
+            <div className={cx('volume-control-progress')} onClick={mouseClick}></div>
+            <div className={cx('volume-control-circle')}></div>
+            <div className={cx('volume-control-bar')} ref={barRef}></div>
+        </div>
+    );
+}
+
+export default Volume;
