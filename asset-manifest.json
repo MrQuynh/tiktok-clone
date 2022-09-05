@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "/tiktok-clone/static/css/main.099924b6.css",
+    "main.js": "/tiktok-clone/static/js/main.527f56c8.js",
+    "static/js/787.4c9d15e8.chunk.js": "/tiktok-clone/static/js/787.4c9d15e8.chunk.js",
+    "static/media/tieuhy.mp4": "/tiktok-clone/static/media/tieuhy.c52e7ecd5bff349d5674.mp4",
+    "static/media/video2.mp4": "/tiktok-clone/static/media/video2.ba6cb78f1016a12a1bb8.mp4",
+    "static/media/vanthy2.mp4": "/tiktok-clone/static/media/vanthy2.afd8b4a9b9d30734e234.mp4",
+    "static/media/vanthy1.mp4": "/tiktok-clone/static/media/vanthy1.b4fff0f5dbfe54d5a9db.mp4",
+    "static/media/vi.mp4": "/tiktok-clone/static/media/vi.51aa9dcb45d192c450c8.mp4",
+    "static/media/fansam.mp4": "/tiktok-clone/static/media/fansam.6ce17e4359bac1670866.mp4",
+    "static/media/hyn2.mp4": "/tiktok-clone/static/media/hyn2.57639cf941f5d9be13ff.mp4",
+    "static/media/tiktok-qr-phone.gif": "/tiktok-clone/static/media/tiktok-qr-phone.b6d3cc69d3525571aef0.gif",
+    "static/media/v4.mp4": "/tiktok-clone/static/media/v4.d2e03d94cc08bb4d3d13.mp4",
+    "static/media/b5.jpg": "/tiktok-clone/static/media/b5.966e6f785ceff26b7870.jpg",
+    "static/media/b2.jpg": "/tiktok-clone/static/media/b2.112701200e664632cd42.jpg",
+    "static/media/b6.jpg": "/tiktok-clone/static/media/b6.e2d61c0735552ca67b99.jpg",
+    "static/media/b3.jpg": "/tiktok-clone/static/media/b3.df1486da169449a0c973.jpg",
+    "static/media/b4.jpg": "/tiktok-clone/static/media/b4.f0dcba149f352297491d.jpg",
+    "static/media/b1.jpg": "/tiktok-clone/static/media/b1.ab804fafa61b23cfde57.jpg",
+    "static/media/loading.png": "/tiktok-clone/static/media/loading.d531c5ab45f46ce83395.png",
+    "static/media/logo1.svg": "/tiktok-clone/static/media/logo1.bc41fe7673641629bf1c69a7b0e22e06.svg",
+    "index.html": "/tiktok-clone/index.html",
+    "main.099924b6.css.map": "/tiktok-clone/static/css/main.099924b6.css.map",
+    "main.527f56c8.js.map": "/tiktok-clone/static/js/main.527f56c8.js.map",
+    "787.4c9d15e8.chunk.js.map": "/tiktok-clone/static/js/787.4c9d15e8.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.099924b6.css",
+    "static/js/main.527f56c8.js"
+  ]
+}
