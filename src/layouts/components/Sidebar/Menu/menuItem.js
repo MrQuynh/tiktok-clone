@@ -1,6 +1,7 @@
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
+import { memo } from 'react';
 
 import styles from './Menu.module.scss';
 
@@ -23,4 +24,4 @@ MenuItem.propTypes = {
     activeIcon: PropTypes.node.isRequired,
 };
 
-export default MenuItem;
+export default memo(MenuItem);

@@ -14,8 +14,8 @@ function FollowingItem({ data }) {
     const mouseOut = (e) => {
         e.target.pause();
     };
+
     return (
-        // <div className={cx('following-video-item')}>
         <Link
             to={{
                 pathname: '/@' + data.nickname,
@@ -42,7 +42,6 @@ function FollowingItem({ data }) {
                 </div>
             </div>
         </Link>
-        // </div>
     );
 }
 

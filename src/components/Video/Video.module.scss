@@ -88,10 +88,19 @@
     }
 }
 .content-text {
-    width: 80%;
+    max-width: 330px;
 }
 .btn {
     margin: 10px 0 0 20px;
+}
+.follow-btn {
+    color: rgba(22, 24, 35, 0.8);
+    border-color: rgba(22, 24, 35, 0.1);
+
+    &:hover {
+        border-color: rgba(22, 24, 35, 0.1);
+        background-color: rgba(22, 24, 35, 0.04);
+    }
 }
 
 // body

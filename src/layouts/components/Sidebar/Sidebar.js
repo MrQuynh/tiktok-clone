@@ -27,12 +27,14 @@ const PER_PAGE = 5;
 
 function Sidebar({ medium }) {
     const [state, dispatch] = useStore();
+
     const [suggestedUser, setSuggestedUser] = useState([]);
+    const [followingUser, setFollowingUser] = useState([]);
     const [page, setPage] = useState(INIT_PAGE);
     const [login, setLogin] = useState(false);
     const [count, setCount] = useState(suggestedUser.length + 5);
     const [seeMore, setSeeMore] = useState(true);
-    const [dem, setDem] = useState(0);
+    const [demFl, setDemFl] = useState(0);
 
     // get data suggested account
     useEffect(() => {
@@ -43,18 +45,17 @@ function Sidebar({ medium }) {
             })
             .catch((error) => console.log(error));
     }, [page]);
-    // get Following accounts
     useEffect(() => {
-        userService
-            .getFollowing({ page: 1 })
-            .then((data1) => {
-                // setSuggestedUser((prev) => [...prev, ...data]);
-                console.log(data1);
-            })
-            .catch((error) => console.log(error));
+        localStorage.getItem('USER_LOG_IN') &&
+            userService
+                .getFollowing({ page: 1 })
+                .then((data1) => {
+                    setFollowingUser([...data1]);
+                })
+                .catch((error) => console.log(error));
     }, []);
 
-    // get more account
+    // get more account suggestedUser
     const handleViewChange = () => {
         setPage(page + 1);
         setCount((prev) => prev + 5);
@@ -66,9 +67,9 @@ function Sidebar({ medium }) {
         if (!seeMore) {
             setSeeMore(true);
             setSuggestedUser(state.data.slice(0, 5));
-            setDem((pre) => pre + 1);
+            setDemFl((pre) => pre + 1);
         }
-        if (dem >= 1) {
+        if (demFl >= 1) {
             setSeeMore(!seeMore);
             setSuggestedUser(state.data);
         }
@@ -78,6 +79,7 @@ function Sidebar({ medium }) {
     const HandleLogin = () => {
         setLogin(true);
     };
+    console.log('hello');
     return (
         <div className={cx('wrapper', medium && 'medium')}>
             {login ? <ModalOverlay setLogin={setLogin} /> : ''}
@@ -122,7 +124,11 @@ function Sidebar({ medium }) {
                     seeMore={seeMore}
                     onViewChange={handleViewChange}
                 />
-                {/* <SuggestAccounts label="Following accounts" /> */}
+                {localStorage.getItem('USER_LOG_IN') ? (
+                    <SuggestAccounts label="Following accounts" data={followingUser} />
+                ) : (
+                    ''
+                )}
             </div>
             <footer className={cx('footer')}>
                 <ul className={cx('footer-list')}>

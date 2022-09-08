@@ -116,13 +116,16 @@ function Header() {
     const HandleLogin = () => {
         setLogin(true);
     };
+    const handleReload = () => {
+        window.location.reload();
+    };
 
     return (
         <header className={cx('wrapper')}>
             {login ? <ModalOverlay setLogin={setLogin} /> : ''}
             <div className={cx('inner')}>
-                <Link to={routesConfig.home} className={cx('logo-link')}>
-                    <img className={cx('logo-image')} src={images.logo} alt="Tiktok" />
+                <Link to="/" className={cx('logo-link')}>
+                    <img className={cx('logo-image')} src={images.logo} onClick={handleReload} alt="Tiktok" />
                 </Link>
 
                 {/* search */}
@@ -142,9 +145,11 @@ function Header() {
                                 </Link>
                             </Tippy>
                             <Tippy delay={[0, 50]} content="Messages" placement="bottom">
-                                <button className={cx('action-btn')}>
-                                    <MessageIcon className={cx('message-icon')} />
-                                </button>
+                                <Link to="/">
+                                    <button className={cx('action-btn')}>
+                                        <MessageIcon className={cx('message-icon')} />
+                                    </button>
+                                </Link>
                             </Tippy>
                             <Tippy delay={[0, 50]} content="Inbox" placement="bottom">
                                 <button className={cx('action-btn')}>
@@ -165,18 +170,7 @@ function Header() {
                     )}
                     <Menu items={item} onChange={handleMenuChange}>
                         {currentUser?.status ? (
-                            // <Link
-                            //     to={{
-                            //         pathname: '/@' + JSON.parse(currentUser?.userLogIn).nickname,
-                            //     }}
-                            // >
-                            <Image
-                                src={JSON.parse(currentUser?.userLogIn).avatar}
-                                className={cx('user-avatar')}
-                                // alt={userInfoLogIn.first_name}
-                                // fallback="https://scontent.fdad3-5.fna.fbcdn.net/v/t39.30808-6/279841216_1091212664941555_4727043539452060717_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=4RB0MOg_irsAX9qdhcU&_nc_ht=scontent.fdad3-5.fna&oh=00_AT-zZLb-MWVTqtvdUNvU9Zbn_-7VNKibHfjFvX59Bbrvow&oe=62FCEAC9"
-                                // fallback="https://static.fullstack.edu.vn/static/media/f8-icon.18cd71cfcfa33566a22b.png"
-                            />
+                            <Image src={JSON.parse(currentUser?.userLogIn).avatar} className={cx('user-avatar')} />
                         ) : (
                             // </Link>
                             <button className={cx('more-btn')}>

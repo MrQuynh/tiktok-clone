@@ -15,13 +15,25 @@ import BoxShare from '../BoxShare';
 
 import ModalOverlay from '../ModalOverlay';
 import Volume from '../Volume';
+import * as userService from '~/services/userService';
 
 const cx = classNames.bind(styles);
 
 const VideoInfo = ({ data }) => {
     const [login, setLogin] = useState(false);
+
+    const [follow, setFollow] = useState(data.is_followed);
     const HandleLogin = () => {
-        setLogin(true);
+        if (localStorage.getItem('USER_LOG_IN')) {
+            setFollow(!follow);
+            if (!follow) {
+                userService.postFollow(data.id);
+            } else {
+                userService.postUnFollow(data.id);
+            }
+        } else {
+            setLogin(true);
+        }
     };
 
     return (
@@ -83,21 +95,28 @@ const VideoInfo = ({ data }) => {
                         nickName={data.nickname}
                         id={data.popular_video.id}
                         video={data.popular_video.file_url}
+                        is_liked={data.popular_video.is_liked}
                     />
                 </div>
             </div>
             <div>
-                <Button outline small className={cx('btn')} onClick={HandleLogin}>
-                    Follow
-                </Button>
+                {follow ? (
+                    <Button outline small className={cx('btn', 'follow-btn')} onClick={HandleLogin}>
+                        Following
+                    </Button>
+                ) : (
+                    <Button outline small className={cx('btn')} onClick={HandleLogin}>
+                        Follow
+                    </Button>
+                )}
             </div>
         </div>
     );
 };
 // ,
-const VideoContent = ({ video, like, nickName, id, comments, share }) => {
+const VideoContent = ({ video, like, nickName, id, comments, share, is_liked }) => {
     const [isPlaying, setIsPlaying] = useState(false);
-    const [heart, setHeart] = useState(false);
+    const [heart, setHeart] = useState(is_liked);
     const videoRef = useRef();
 
     const handleClick = () => {
@@ -159,9 +178,17 @@ const VideoContent = ({ video, like, nickName, id, comments, share }) => {
                     <FaHeart className={cx('action-icon', heart && 'active')} onClick={() => setHeart(!heart)} />
                     <p className={cx('vote')}>{like || 0}</p>
                 </div>
-                <div className={cx('action-item')}>
-                    <BsFillChatDotsFill className={cx('action-icon')} /> <p className={cx('vote')}>{comments || 0}</p>
-                </div>
+                <Link
+                    to={{
+                        pathname: '/@' + nickName + '/watching',
+                        search: 'id=' + id,
+                    }}
+                >
+                    <div className={cx('action-item')}>
+                        <BsFillChatDotsFill className={cx('action-icon')} />{' '}
+                        <p className={cx('vote')}>{comments || 0}</p>
+                    </div>
+                </Link>
                 <div className={cx('action-item')}>
                     <FaShare className={cx('action-icon')} />
                     <p className={cx('vote')}>{share || 0}</p>

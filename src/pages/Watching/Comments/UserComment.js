@@ -14,7 +14,6 @@ const avatar =
 const nickNameCmt = 'quynhnv2300';
 const commentCmt = 'khi co dua ban la dai ca';
 const timeCmt = 5;
-const idCmt = 5;
 const likeCommentCmt = 345;
 function UserComment() {
     const [showCmt, setShowCmt] = useState('hidden');
@@ -22,21 +21,11 @@ function UserComment() {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('info')}>
-                <Link
-                    to={{
-                        pathname: '/@' + nickNameCmt,
-                        search: 'id=' + idCmt,
-                    }}
-                >
+                <Link to="/">
                     <Image src={avatar} className={cx('avatar')} />
                 </Link>
                 <div className={cx('body')}>
-                    <Link
-                        to={{
-                            pathname: '/@' + nickNameCmt,
-                            search: 'id=' + idCmt,
-                        }}
-                    >
+                    <Link to="/">
                         <p className={cx('nickname')}>{nickNameCmt}</p>
                     </Link>
                     <p className={cx('comment')}>{commentCmt}</p>

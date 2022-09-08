@@ -7,6 +7,8 @@ import Button from '~/components/Button';
 import Image from '~/components/Image';
 
 import styles from './Upload.module.scss';
+import images from '~/assets/images';
+import * as userService from '~/services/userService';
 
 const cx = classNames.bind(styles);
 const linkImage1 =
@@ -18,12 +20,51 @@ function Upload() {
 
     const [runcheck, setRuncheck] = useState(false);
     const [whoView, setWhoView] = useState(false);
+    const [hasVideo, setHasVideo] = useState(false);
     // const whoValue = whoViewList[0];
     const [whoValue, setWhoValue] = useState('');
 
     const onUpload = () => {
         document.getElementById('input-upload').click();
     };
+
+    // get value
+    const [description, setDescription] = useState('');
+    const [valueVideo, setValueVideo] = useState('');
+
+    const handleDescription = (e) => {
+        setDescription(e.target.value);
+    };
+    // console.log(valueVideo);
+    const handleValueVideo = (e) => {
+        // setValueVideo(e.target.value);
+        const file = document.querySelector('#input-upload').files[0];
+        const preview = document.querySelector('#video-edit-upload');
+        // const preVideo = document.querySelector('#left-video');
+        const reader = new FileReader();
+        reader.addEventListener(
+            'load',
+            () => {
+                preview.src = reader.result;
+
+                // preVideo.src = reader.result;
+                setValueVideo(reader.result);
+            },
+            false,
+        );
+        if (file) {
+            reader.readAsDataURL(file);
+            setHasVideo(true);
+        }
+    };
+    // console.log(valueVideo);
+    // send data to server
+    const dataSend = { viewable: 'public', description: 'hello ae f8' };
+    const handleSubmit = () => {
+        console.log(dataSend);
+        userService.postCreateVideo(dataSend).then((data) => console.log(data));
+    };
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('body')}>
@@ -32,22 +73,39 @@ function Upload() {
                     <div className={cx('upload-title-small')}>Post a video to your account</div>
                     <div className={cx('upload-body')}>
                         <div className={cx('left')}>
-                            <div className={cx('left-wrapper')} onClick={onUpload}>
-                                <input type="file" id="input-upload" className={cx('input-upload')} />
-                                <Image
-                                    className={cx('left-icon')}
-                                    src="https://lf16-tiktok-common.ttwstatic.com/obj/tiktok-web-common-sg/ies/creator_center/svgs/cloud-icon1.ecf0bf2b.svg"
-                                />
-                                <div className={cx('left-text-main')}>Select video to upload</div>
-                                <div className={cx('left-text-sub')}>Or drag and drop a file</div>
-                                <div className={cx('left-text-video-info')}>MP4 or WebM</div>
-                                <div className={cx('left-text-video-info')}>720x1280 resolution or higher</div>
-                                <div className={cx('left-text-video-info')}>Up to 10 minutes</div>
-                                <div className={cx('left-text-video-info')}>Less than 2GB</div>
-                                <Button primary className={cx('left-select-btn')}>
-                                    Select file
-                                </Button>
-                            </div>
+                            {hasVideo ? (
+                                <div className={cx('left-video-background')}>
+                                    <Image src={images.phoneBackground} className={cx('left-video-background')} />
+                                    {valueVideo && (
+                                        <video className={cx('left-video')} id="left-video" controls>
+                                            <source src={valueVideo} />
+                                        </video>
+                                    )}
+                                </div>
+                            ) : (
+                                <div className={cx('left-wrapper')} onClick={onUpload}>
+                                    <input
+                                        type="file"
+                                        // value={valueVideo}
+                                        onChange={handleValueVideo}
+                                        id="input-upload"
+                                        className={cx('input-upload')}
+                                    />
+                                    <Image
+                                        className={cx('left-icon')}
+                                        src="https://lf16-tiktok-common.ttwstatic.com/obj/tiktok-web-common-sg/ies/creator_center/svgs/cloud-icon1.ecf0bf2b.svg"
+                                    />
+                                    <div className={cx('left-text-main')}>Select video to upload</div>
+                                    <div className={cx('left-text-sub')}>Or drag and drop a file</div>
+                                    <div className={cx('left-text-video-info')}>MP4 or WebM</div>
+                                    <div className={cx('left-text-video-info')}>720x1280 resolution or higher</div>
+                                    <div className={cx('left-text-video-info')}>Up to 10 minutes</div>
+                                    <div className={cx('left-text-video-info')}>Less than 2GB</div>
+                                    <Button primary className={cx('left-select-btn')}>
+                                        Select file
+                                    </Button>
+                                </div>
+                            )}
                         </div>
                         <div className={cx('right')}>
                             <div className={cx('caption-wrap')}>
@@ -55,7 +113,12 @@ function Upload() {
                                     <p>Caption</p> <span>0 / 150</span>
                                 </div>
                                 <div className={cx('box', 'box-input')}>
-                                    <input type="text" className={cx('input')} />
+                                    <input
+                                        type="text"
+                                        value={description}
+                                        onChange={handleDescription}
+                                        className={cx('input')}
+                                    />
                                     <div className={cx('input-style')}>
                                         <span>@</span>
                                         <span>#</span>
@@ -66,6 +129,11 @@ function Upload() {
                                 <div className={cx('label')}>Cover</div>
 
                                 <div className={cx('box', 'box-cover')}>
+                                    <div className={cx('cover-video')}>
+                                        <video controls id="video-edit-upload" className={cx('cover-video')}>
+                                            <source src="" />
+                                        </video>
+                                    </div>
                                     <div className={cx('cover-video')}></div>
                                 </div>
                             </div>
@@ -129,10 +197,10 @@ function Upload() {
                                 </div>
                             )}
                             <div className={cx('btn-body')}>
-                                <Button outline large className={cx('btn')}>
+                                <Button outline large className={cx('btn')} onClick={handleSubmit}>
                                     Discard
                                 </Button>
-                                <Button outline large disabled className={cx('btn')}>
+                                <Button outline large disabled className={cx('btn', valueVideo && 'btn-active')}>
                                     Post
                                 </Button>
                             </div>

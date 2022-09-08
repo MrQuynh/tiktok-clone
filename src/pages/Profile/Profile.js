@@ -11,21 +11,29 @@ import styles from './Profile.module.scss';
 import ProfileVideo from './ProfileVideo';
 
 import BoxShare from '~/components/BoxShare';
-import { BiBlock } from 'react-icons/bi';
+import { BiBlock, BiUserCheck } from 'react-icons/bi';
 
 import * as anUserService from '~/services/userService';
 import LoadingIcon from '~/assets/LoadingIcon';
 import ModalEdit from '~/components/ModalEdit';
+import * as userService from '~/services/userService';
+
+import { actions } from '~/store';
+import { useStore } from '~/hooks';
 
 const cx = classNames.bind(styles);
 
 function Profile() {
     const [active, setActive] = useState(true);
     const [anUser, setAnUser] = useState([]);
-    const [isLogin, setIsLogIn] = useState(false);
-    const match = useLocation();
+    const [isLogin, setIsLogIn] = useState('user');
     const [loading, setLoading] = useState(true);
+    const [isFollow, setIsFollow] = useState(null);
 
+    // set current user info to store
+    const [state, dispatch] = useStore();
+
+    const match = useLocation();
     const nicknameValue = match.pathname;
 
     const handleActive = () => {
@@ -38,23 +46,35 @@ function Profile() {
             .then((data) => {
                 setAnUser(data);
                 setLoading(false);
+                if (data.is_followed) {
+                    setIsFollow(true);
+                } else {
+                    setIsFollow(false);
+                }
             })
             .catch((error) => console.log(error));
     }, [nicknameValue]);
     // compare account login with account info
     useEffect(() => {
         if (JSON.parse(localStorage.getItem('USER_LOG_IN'))?.nickname === anUser.nickname) {
-            setIsLogIn(true);
+            setIsLogIn('author');
         }
     }, [anUser.nickname]);
-
     // open modal edit
     const [modalEdit, setModalEdit] = useState(false);
 
     const handleModalEdit = () => {
         setModalEdit(true);
     };
-
+    // un follow
+    const handleUnFollow = () => {
+        userService.postUnFollow(anUser.id);
+        setIsFollow(false);
+    };
+    const handleFollow = () => {
+        userService.postFollow(anUser.id);
+        setIsFollow(true);
+    };
     return loading ? (
         <div className={cx('loading')}>
             <LoadingIcon />
@@ -78,16 +98,33 @@ function Profile() {
                             <h4 className={cx('nickname')}>
                                 {anUser.nickname} {anUser.tick && <AiFillCheckCircle className={cx('icon-tick')} />}
                             </h4>
-                            <p className={cx('name')}>{`${anUser.nickname} ${anUser.last_name}`}</p>
+                            <p className={cx('name')}>{`${anUser.first_name} ${anUser.last_name}`}</p>
 
-                            {isLogin ? (
+                            {isLogin === 'author' ? (
                                 <Button primary className={cx('btn', 'edit')} onClick={handleModalEdit}>
                                     <div>
                                         <FiEdit className={cx('edit-icon')} /> Edit profile
                                     </div>
                                 </Button>
+                            ) : isFollow ? (
+                                <div className={cx('message-body')}>
+                                    <Button
+                                        to="/messages"
+                                        outline
+                                        large
+                                        onClick={() => dispatch(actions.setCurrentUserInfo(anUser))}
+                                        className={cx('message-btn')}
+                                    >
+                                        Messages
+                                    </Button>
+
+                                    <div className={cx('message-icon')} onClick={handleUnFollow}>
+                                        <BiUserCheck />
+                                        <div className={cx('tippy-unfollow')}>UnFollow</div>
+                                    </div>
+                                </div>
                             ) : (
-                                <Button primary className={cx('btn')}>
+                                <Button primary className={cx('btn')} onClick={handleFollow}>
                                     Follow
                                 </Button>
                             )}

@@ -42,10 +42,53 @@ export const postLogin = async (dataSend, errorMess) => {
         return (errorMess = error.response);
     }
 };
+export const postUpdateUser = async (dataSend, errorMess) => {
+    try {
+        const res = await request.patch('auth/me', dataSend);
+        return res;
+    } catch (error) {
+        return (errorMess = error.response);
+    }
+};
 export const postRegister = async (dataSend, errorMess) => {
     try {
         const res = await request.post('auth/register', dataSend);
         return res.data;
+    } catch (error) {
+        return (errorMess = error.response);
+    }
+};
+// follow
+export const postFollow = async (idUser, errorMess) => {
+    try {
+        const res = await request.post(`users/${idUser}/follow`);
+        return res.data;
+    } catch (error) {
+        return (errorMess = error.response);
+    }
+};
+export const postUnFollow = async (idUser, errorMess) => {
+    try {
+        const res = await request.post(`users/${idUser}/unfollow`);
+        return res.data;
+    } catch (error) {
+        return (errorMess = error.response);
+    }
+};
+// upload
+export const postCreateVideo = async (dataSend, errorMess) => {
+    try {
+        const res = await request.post('videos', dataSend);
+        return res;
+    } catch (error) {
+        return (errorMess = error.response);
+    }
+};
+// delete
+export const deleteVideo = async (idVideo, errorMess) => {
+    try {
+        const res = await request.DELETE(`videos/${idVideo}`);
+        return res;
     } catch (error) {
         return (errorMess = error.response);
     }

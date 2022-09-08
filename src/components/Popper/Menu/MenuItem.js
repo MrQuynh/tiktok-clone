@@ -12,7 +12,7 @@ function MenuItem({ data, onClick }) {
     let link = data.to;
     let handleClick = onClick;
     if (data.title === 'View profile') {
-        link = '@' + JSON.parse(localStorage.getItem('USER_LOG_IN')).nickname;
+        link = '/@' + JSON.parse(localStorage.getItem('USER_LOG_IN')).nickname;
     }
     if (data.title === 'Log out') {
         link = '/';

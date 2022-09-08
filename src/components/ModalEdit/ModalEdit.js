@@ -4,19 +4,27 @@ import styles from './ModalEdit.module.scss';
 import { AiOutlineClose } from 'react-icons/ai';
 import Image from '~/components/Image';
 import { FiEdit } from 'react-icons/fi';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import * as userService from '~/services/userService';
+import images from '~/assets/images';
 
 const cx = classNames.bind(styles);
-const linkavatar =
-    'https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/7124212580931796997~c5_100x100.jpeg?x-expires=1662519600&x-signature=2DQYj4AxMr8hdUcGFajt3qeGnKo%3D';
+
 function ModalEdit({ setModalEdit, avatar, nickname, name, bio }) {
     const [nicknameEdit, setNicknameEdit] = useState(nickname);
+    const [avatarEdit, setAvatarEdit] = useState(avatar);
     const [nameEdit, setNameEdit] = useState(name);
     const [bioEdit, setBioEdit] = useState(bio);
 
     const handleEditAvatar = () => {
-        document.getElementById('input-edit').click();
+        const inputFile = document.getElementById('input-edit');
+        inputFile.click();
+        // setAvatarEdit()
     };
+    const handleInputAvatar = (e) => {
+        // setAvatarEdit(e.target.value);
+    };
+
     const handleCloseModel = () => {
         setModalEdit(false);
     };
@@ -30,13 +38,16 @@ function ModalEdit({ setModalEdit, avatar, nickname, name, bio }) {
     const handleTextBio = (e) => {
         setBioEdit(e.target.value);
     };
-
     // save
     const handleCancel = () => {
         setModalEdit(false);
     };
+
+    const dataSend = { first_name: nameEdit, bio: bioEdit };
     const handleSave = () => {
         setModalEdit(false);
+        userService.postUpdateUser(dataSend).then((data) => console.log(data));
+        window.location.reload();
     };
     return (
         <Portal>
@@ -52,8 +63,13 @@ function ModalEdit({ setModalEdit, avatar, nickname, name, bio }) {
                         <div className={cx('content-item')}>
                             <div className={cx('content-label')}>Profile photo</div>
                             <div className={cx('avatar-content')} onClick={handleEditAvatar}>
-                                <input type="file" id="input-edit" className={cx('input-edit')} />
-                                <Image src={avatar} className={cx('avatar')} />
+                                <input
+                                    type="file"
+                                    id="input-edit"
+                                    className={cx('input-edit')}
+                                    onChange={handleInputAvatar}
+                                />
+                                <Image src={avatarEdit} className={cx('avatar')} />
                                 <div className={cx('icon-edit')}>
                                     <FiEdit />
                                 </div>

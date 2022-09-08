@@ -4,6 +4,7 @@ import { AiOutlineClose, AiTwotoneHeart } from 'react-icons/ai';
 import {
     BsCheckSquare,
     BsChevronDown,
+    BsEmojiSmile,
     BsFacebook,
     BsFillPlayFill,
     BsFlag,
@@ -12,7 +13,7 @@ import {
     BsWhatsapp,
 } from 'react-icons/bs';
 import { FaCommentDots } from 'react-icons/fa';
-import { FiSend } from 'react-icons/fi';
+import { FiMoreHorizontal, FiSend } from 'react-icons/fi';
 import { ImEmbed } from 'react-icons/im';
 import Button from '~/components/Button';
 import Image from '~/components/Image';
@@ -23,9 +24,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import { useEffect, useRef, useState } from 'react';
 import * as anUserService from '~/services/userService';
-// import WatchingVideo from './WatchingVideo';
-// import ReactPlayer from 'react-player';
-// import videos from '~/assets/videos';
+import * as userService from '~/services/userService';
+import { ModalSettings } from '~/components/ModalEdit';
 
 const cx = classNames.bind(styles);
 
@@ -47,7 +47,7 @@ function Watching() {
                     return;
                 }
                 setData(data);
-
+                data.is_followed ? setIsFollow(true) : setIsFollow(false);
                 setLinkVideo(data.videos.find((video) => video.id === +idVideo));
             })
             .catch((error) => console.log(error));
@@ -66,9 +66,48 @@ function Watching() {
         play ? videoRef.current.play() : videoRef.current.pause();
     };
     const [count, setCount] = useState(0);
+    // check user
+    const [isLogin, setIsLogIn] = useState(null);
+    const [isFollow, setIsFollow] = useState(null);
+
+    useEffect(() => {
+        if (JSON.parse(localStorage.getItem('USER_LOG_IN'))?.nickname === data.nickname) {
+            setIsLogIn('author');
+        }
+    }, [data.nickname]);
+    const handleUnFollow = () => {
+        userService.postUnFollow(data.id);
+        setIsFollow(false);
+    };
+    const handleFollow = () => {
+        userService.postFollow(data.id);
+        setIsFollow(true);
+    };
+    // handle delete
+    const [modal, setModal] = useState(false);
+    const [title, setTitle] = useState('');
+    const handleDelete = () => {
+        setModal(true);
+        setTitle('delete');
+    };
+    const handleSettings = () => {
+        setModal(true);
+        setTitle('settings');
+    };
+    // footer
+    const [value, setValue] = useState('');
+    const [hasValue, setHasValue] = useState(false);
+    const handleOnInput = (e) => {
+        setValue(e.target.value);
+        value && setHasValue(true);
+    };
+    const handleOnBlur = () => {
+        value ? setHasValue(true) : setHasValue(false);
+    };
 
     return (
         <div className={cx('wrapper')}>
+            {modal && <ModalSettings title={title} setModal={setModal} idVideo={linkVideo.id} />}
             <div className={cx('body-video')} onClick={() => setCount(count + 1)}>
                 <div>
                     {linkVideo && (
@@ -157,9 +196,29 @@ function Watching() {
                                 </p>
                             </div>
                         </Link>
-                        <Button outline large className={cx('btn')}>
-                            Follow
-                        </Button>
+
+                        {isLogin === 'author' ? (
+                            <div className={cx('more-login')}>
+                                <FiMoreHorizontal className={cx('actions-more-icon')} />
+
+                                <div className={cx('more-list')}>
+                                    <div className={cx('more-item')} onClick={handleSettings}>
+                                        Privacy settings
+                                    </div>
+                                    <div className={cx('more-item')} onClick={handleDelete}>
+                                        Delete
+                                    </div>
+                                </div>
+                            </div>
+                        ) : !isFollow ? (
+                            <Button outline large className={cx('btn')} onClick={handleFollow}>
+                                Follow
+                            </Button>
+                        ) : (
+                            <Button outline large className={cx('btn', 'btn-following')} onClick={handleUnFollow}>
+                                Following
+                            </Button>
+                        )}
                     </div>
 
                     <div className={cx('content')}>
@@ -225,7 +284,29 @@ function Watching() {
                     <UserComment />
                 </div>
                 <footer className={cx('footer')}>
-                    <div className={cx('footer-text')}>Please log in to comment</div>
+                    {isLogin ? (
+                        <div className={cx('footer-text')}>Please log in to comment</div>
+                    ) : (
+                        <div className={cx('chat-box-bottom')}>
+                            <div className={cx('chat-box-bottom-body')}>
+                                <input
+                                    type="text"
+                                    value={value}
+                                    onChange={handleOnInput}
+                                    onBlur={handleOnBlur}
+                                    className={cx('chat-box-input')}
+                                    placeholder="Add comment....."
+                                />
+                                <div className={cx('emotion-body')}>
+                                    <BsEmojiSmile className={cx('chat-box-emotion')} />
+                                    <div className={cx('emotion-hover')}>Click to add emojis</div>
+                                </div>
+                            </div>
+                            {/* {sendBtn && ( */}
+                            <div className={cx('send-btn', hasValue && 'active-value')}>Post</div>
+                            {/* )} */}
+                        </div>
+                    )}
                 </footer>
             </div>
         </div>

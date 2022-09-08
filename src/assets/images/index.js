@@ -1,6 +1,7 @@
 const images = {
     logo: require('~/assets/images/logo1.svg').default,
     noImage: require('~/assets/images/no-image.png'),
+    phoneBackground: require('~/assets/images/phone-background.png'),
     qr: require('~/assets/images/qr.png'),
     qrPhone: require('~/assets/images/tiktok-qr-phone.gif'),
     hyn: require('~/assets/images/hyn.jpeg'),
