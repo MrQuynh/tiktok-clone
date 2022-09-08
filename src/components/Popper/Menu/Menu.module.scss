@@ -8,6 +8,7 @@
 
 .menu-popper {
     padding-bottom: 8px;
+    background-color: white;
 }
 .menu-body {
     overflow-y: overlay;
@@ -20,13 +21,14 @@
     font-weight: 600;
     padding: 11px 16px;
     line-height: 1.8rem;
+    background-color: white;
 
     &.separate {
-        border-top: 1px solid rgba(22, 24, 35, 0.12);
+        border-top: 1px solid var(--border-color);
     }
 
     &:hover {
-        background-color: rgba(22, 24, 35, 0.03);
+        background-color: rgba(225, 225, 225, 0.3);
     }
 }
 // header

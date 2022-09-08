@@ -1,5 +1,5 @@
 .wrapper {
-    margin-bottom: 26px;
+    // margin-bottom: 26px;
     overflow-x: hidden;
     overflow-y: auto;
     overscroll-behavior-y: contain;
@@ -10,7 +10,7 @@
     bottom: 0;
     width: var(--width-sidebar);
 
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-color-sidebar);
     position: fixed;
     padding-right: 8px;
 
@@ -34,12 +34,12 @@
 }
 // sidebar login
 .sidebar-login {
-    border-top: 1px solid #e3e3e4;
+    border-top: 1px solid var(--border-color);
     padding: 20px 0;
     margin: 10px 0;
 }
 .sidebar-login-text {
-    color: rgba(22, 24, 35, 0.5);
+    color: var(--text-color-gray);
     font-size: 16px;
     line-height: 22px;
     padding-bottom: 20px;
@@ -49,14 +49,15 @@
     font-weight: 700;
 }
 .footer {
+    padding-top: 14px;
     width: 100%;
     font-size: 1.2rem;
-    color: rgba(22, 24, 35, 0.01);
+    color: var(--text-color-gray);
     line-height: 1.7rem;
     display: inline-block;
     margin-bottom: 12px;
     font-weight: 400;
-    border-top: 1px solid #e3e3e4;
+    border-top: 1px solid var(--border-color);
 }
 .footer-list {
     display: flex;
@@ -74,7 +75,7 @@
 .end {
     display: block;
     margin: 26px 0 16px;
-    color: rgba(22, 24, 35, 0.5);
+    color: var(--text-color-gray);
     font-weight: 600;
     font-size: 1.2rem;
 }
@@ -86,7 +87,7 @@
 @media (max-width: 740px) {
     .wrapper {
         width: 72px;
-        border-right: 1px solid rgba(22, 24, 35, 0.12);
+        border-right: 1px solid var(--border-color);
         margin: 0 -18px;
         &::-webkit-scrollbar {
             display: none;

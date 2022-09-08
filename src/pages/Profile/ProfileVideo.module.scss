@@ -10,7 +10,7 @@
 }
 .item-video-body {
     width: 100%;
-    background-color: white;
+    background-color: var(--bg-gray);
     position: relative;
 }
 .item-video {
@@ -25,11 +25,12 @@
     bottom: 22px;
     font-weight: 600;
     color: white;
+
     left: 8px;
     line-height: 1.2rem;
 }
 .item-play-icon {
-    color: rgb(235, 228, 232);
+    color: white;
     font-size: 3rem;
 }
 .item-video-content {

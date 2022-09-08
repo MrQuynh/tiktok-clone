@@ -1,11 +1,13 @@
 .wrapper {
+    background-color: var(--bg-gray);
+    color: var(--text-color-black);
     display: flex;
     align-items: center;
     padding: 6px 16px;
     cursor: pointer;
 
     &:hover {
-        background-color: rgba(22, 24, 35, 0.03);
+        background-color: var(--bg-color-hover);
     }
 }
 
@@ -27,11 +29,11 @@
 }
 .check {
     margin-left: 6px;
-    color: rgb(32, 213, 236);
+    color: var(--tick-color);
     font-size: 1.4rem;
 }
 
 .username {
     font-size: 1.4rem;
-    color: rgba(22, 24, 35, 0.5);
+    color: var(--text-color-gray);
 }

@@ -12,6 +12,7 @@ import { SearchIcon } from '~/components/Icons';
 import { useDebounce } from '~/hooks';
 
 import * as searchServices from '~/services/searchService';
+import Button from '~/components/Button';
 
 const cx = classNames.bind(styles);
 
@@ -85,13 +86,13 @@ function Search() {
                     />
                     {!!searchValue && !loading && (
                         <button className={cx('clear')} onClick={handleClear}>
-                            <FontAwesomeIcon icon={faCircleXmark} />
+                            <FontAwesomeIcon className={cx('icon')} icon={faCircleXmark} />
                         </button>
                     )}
                     {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
 
                     <button className={cx('search-btn')} onMouseDown={(e) => e.preventDefault()}>
-                        <SearchIcon />
+                        <SearchIcon className={cx('icon')} />
                     </button>
                 </div>
             </HeadlessTippy>

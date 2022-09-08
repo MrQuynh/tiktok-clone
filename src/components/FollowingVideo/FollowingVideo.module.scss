@@ -29,7 +29,7 @@
     margin-bottom: 18px;
     float: left;
     overflow: hidden;
-    // background-color: pink;
+    background-color: var(--bg-gray);
 }
 .video-body {
     width: 100%;
@@ -46,7 +46,6 @@
     display: flex;
     flex-direction: column;
     position: absolute;
-    // text-align: center;
     justify-content: center;
     align-items: center;
     z-index: 1;
@@ -59,7 +58,7 @@
     width: 80px;
 }
 .info {
-    color: rgb(255, 255, 255);
+    color: white;
     font-weight: 700;
     font-size: 18px;
     line-height: 25px;
@@ -68,7 +67,7 @@
     text-align: center;
 }
 .nickname {
-    color: rgb(255, 255, 255);
+    color: white;
     font-weight: 600;
     font-size: 14px;
     line-height: 20px;
@@ -80,7 +79,7 @@
     text-align: center;
 }
 .icon {
-    color: rgb(32, 213, 236);
+    color: var(--tick-color);
     font-size: 1.4rem;
     margin: 0 0 4px 4px;
 }

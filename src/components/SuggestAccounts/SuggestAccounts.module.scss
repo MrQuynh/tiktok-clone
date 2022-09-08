@@ -1,11 +1,11 @@
 .wrapper {
     padding: 20px 0 26px 8px;
-    border-top: 1px solid #e3e3e4;
+    border-top: 1px solid var(--border-color);
 }
 .label {
     font-size: 1.4rem;
     font-weight: 500;
-    color: rgba(22, 24, 35, 0.75);
+    color: var(--text-color-black);
 
     margin-bottom: 8px;
 }
@@ -14,7 +14,7 @@
     padding: 8px 0;
 
     &:hover {
-        background: rgba(22, 24, 35, 0.03);
+        background: var(--bg-color-hover);
     }
 }
 .info {
@@ -32,7 +32,7 @@
     height: 50px;
 }
 .nick-name {
-    color: rgb(22, 24, 35);
+    color: var(--text-color-black);
     font-weight: 700;
     font-size: 1.6rem;
     line-height: 2.2rem;
@@ -41,25 +41,25 @@
     font-size: 1.8rem;
 }
 .icon {
-    color: rgb(32, 213, 236);
+    color: var(--tick-color);
     font-size: 1.4rem;
     margin: 0 0 4px 4px;
 }
 .name {
-    color: rgba(22, 24, 35, 0.75);
+    color: var(--text-color-black);
     font-size: 1.2rem;
     font-weight: 400;
     line-height: 1.5rem;
 }
 .name.medium {
     font-weight: 400;
-    color: black;
+    color: var(--text-color-black);
     font-size: 1.4rem;
     padding: 4px 0;
 }
 .more-btn {
     display: block;
-    color: rgb(254, 44, 85);
+    color: var(--primary);
     font-weight: 600;
     font-size: 1.4rem;
     line-height: 2rem;
@@ -71,7 +71,7 @@
 .account {
     display: flex;
     flex-direction: column;
-    background-color: white;
+    background-color: var(--bg-color);
     border-radius: 12px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     padding: 16px;
@@ -79,14 +79,15 @@
     z-index: 10;
 }
 .account-header {
-    // display: flex;
-    // justify-content: space-between;
     margin-bottom: 6px;
 
     position: relative;
 }
 .info-follow {
     margin: 4px 0 0 0;
+}
+.vote-body {
+    color: var(--text-color-black);
 }
 .vote-body .vote:nth-child(2) {
     margin-left: 20px;
@@ -95,18 +96,17 @@
     margin-right: 4px;
 }
 .btn-small-account {
-    // font-size: 1.6rem;
     position: absolute;
     right: 0;
     top: 50%;
     transform: translateY(-50%);
 }
 .btn-account-follow {
-    border-color: rgba(0, 0, 0, 0.1);
-    color: rgb(68, 68, 68);
+    border-color: var(--border-color);
+    color: var(--text-color-gray);
 
     &:hover {
-        background-color: white;
+        background-color: var(--bg-color);
     }
 }
 @media (max-width: 740px) {

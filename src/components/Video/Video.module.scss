@@ -1,11 +1,11 @@
 .video {
     padding: 20px 0;
-    border-bottom: 1px solid rgba(22, 24, 35, 0.12);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .wrapper {
     display: flex;
-    // justify-content: space-around;
+    color: var(--text-color-black);
 }
 .info {
     display: flex;
@@ -16,7 +16,7 @@
 .name-out {
     display: inline-block;
     position: relative;
-
+    color: var(--text-color-black);
     &::after {
         position: absolute;
         content: '';
@@ -28,8 +28,6 @@
 
     &:hover .follow-account {
         display: block;
-
-        // animation: view ease-in 0.1s;
     }
 }
 @keyframes view {
@@ -92,14 +90,15 @@
 }
 .btn {
     margin: 10px 0 0 20px;
+    background-color: var(--bg-color);
 }
 .follow-btn {
-    color: rgba(22, 24, 35, 0.8);
-    border-color: rgba(22, 24, 35, 0.1);
+    color: var(--text-color-black);
+    border-color: var(--border-color);
 
     &:hover {
-        border-color: rgba(22, 24, 35, 0.1);
-        background-color: rgba(22, 24, 35, 0.04);
+        border-color: var(--border-color);
+        background-color: var(--bg-color-hover);
     }
 }
 
@@ -111,11 +110,9 @@
 // video
 .body-video {
     display: flex;
-
     width: 260px;
     height: 460px;
-    // margin-left: 116px;
-    background-color: rgb(0, 0, 0);
+    background-color: var(--bg-gray);
     display: flex;
     align-items: center;
     border-radius: 8px;
@@ -159,7 +156,7 @@
 }
 .sound-icon {
     position: absolute;
-    color: white;
+    color: var(--text-color-white);
     font-size: 2rem;
     top: 77px;
     right: 26px;
@@ -201,13 +198,13 @@
 .action-icon {
     font-size: 2rem;
     margin: 6px 0;
-    color: black;
+    color: var(--text-color-black);
 }
 .active {
     color: var(--primary);
 }
 .vote {
-    color: rgba(22, 24, 35, 0.75);
+    color: var(--text-color-gray);
     font-size: 1.2rem;
     font-weight: 700;
     margin: 16px 0;
@@ -280,16 +277,16 @@
     }
     .actions {
         position: absolute;
-        color: white;
+        color: var(--text-color-white);
 
         right: 30px;
         bottom: 20px;
     }
     .action-icon {
-        color: white;
+        color: var(--text-color-white);
     }
     .vote {
-        color: white;
+        color: var(--text-color-white);
         margin: 6px;
     }
 }

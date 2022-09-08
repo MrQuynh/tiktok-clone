@@ -116,16 +116,49 @@ function Header() {
     const HandleLogin = () => {
         setLogin(true);
     };
-    const handleReload = () => {
-        window.location.reload();
-    };
 
+    // rootStyles.setProperty('--text-color-black', 'black');
+    const [isDark, setIsDark] = useState(false);
+    const rootStyles = document.documentElement.style;
+    const handleDarkMode = () => {
+        if (!isDark) {
+            // change styles
+            rootStyles.setProperty('--primary', 'blue');
+            rootStyles.setProperty('--bg-color', '#202122');
+            rootStyles.setProperty('--bg-color-hover', '#28282b');
+            rootStyles.setProperty('--bg-gray', '#161718');
+            rootStyles.setProperty('--bg-color-btn-fl', '#1772e9');
+            rootStyles.setProperty('--bg-color-hover-btn-fl', '#63a4f8');
+            rootStyles.setProperty('--bg-color-btn-following', 'black');
+            rootStyles.setProperty('--bg-color-hover-btn-following', '#8cb2e4');
+            rootStyles.setProperty('--bg-modal-color', 'rgba(255, 255, 255, 0.5)');
+            rootStyles.setProperty('--bg-color-sidebar', '#222324');
+
+            rootStyles.setProperty('--text-color-black', 'white');
+            rootStyles.setProperty('--text-color-white', 'black');
+            rootStyles.setProperty('--text-color-gray', '#b8c8d8');
+
+            rootStyles.setProperty('--tick-color', '#20d5ec');
+            rootStyles.setProperty('--border-color', '#2f2f30');
+            rootStyles.setProperty('--box-shadow', '0px 1px 1px rgb(255 255 255 / 12%)');
+            rootStyles.setProperty('--box-shadow-share', '1px 1px 2px 2px rgba(255, 255, 255, 0.2)');
+            rootStyles.setProperty('--scroll-color', 'rgba(255, 255, 255, 0.15)');
+            rootStyles.setProperty('--transparent-color', 'transparent');
+
+            rootStyles.setProperty('--white', 'black');
+            rootStyles.setProperty('--black', 'white');
+            setIsDark(true);
+        } else {
+            setIsDark(false);
+            window.location.reload();
+        }
+    };
     return (
         <header className={cx('wrapper')}>
             {login ? <ModalOverlay setLogin={setLogin} /> : ''}
             <div className={cx('inner')}>
                 <Link to="/" className={cx('logo-link')}>
-                    <img className={cx('logo-image')} src={images.logo} alt="Tiktok" />
+                    <img className={cx('logo-image')} src={images.logo} alt="TikTok" />
                 </Link>
 
                 {/* search */}
@@ -133,7 +166,9 @@ function Header() {
                 <div className={cx('search')}>
                     <Search />
                 </div>
-
+                <div className={cx('dark-mode')} onClick={handleDarkMode}>
+                    {isDark ? 'dark' : 'light'}
+                </div>
                 <div className={cx('actions')}>
                     {currentUser?.status ? (
                         <>

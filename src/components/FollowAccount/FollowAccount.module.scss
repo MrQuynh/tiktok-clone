@@ -2,9 +2,9 @@
     position: absolute;
     display: flex;
     flex-direction: column;
-    background-color: white;
+    background-color: var(--bg-color);
     border-radius: 12px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 5px var(--primary);
     padding: 16px;
     min-width: 310px;
     z-index: 1;
@@ -13,6 +13,7 @@
 }
 .account-header {
     margin-bottom: 6px;
+    background-color: var(--bg-color);
 
     position: relative;
 }
@@ -33,11 +34,12 @@
     transform: translateY(-50%);
 }
 .btn-account-follow {
-    border-color: rgba(0, 0, 0, 0.1);
-    color: rgb(68, 68, 68);
+    background-color: var(--primary) !important;
+    border-color: var(--bg-color-hover-btn-following);
+    color: var(--text-color-gray);
 
     &:hover {
-        background-color: white;
+        background-color: var(--bg-color);
     }
 }
 .info {
@@ -45,7 +47,7 @@
     flex: 1;
 }
 .nick-name {
-    color: rgb(22, 24, 35);
+    color: var(--text-color-black);
     font-weight: 700;
     font-size: 1.6rem;
     line-height: 2.2rem;
@@ -55,19 +57,19 @@
     font-weight: 700;
 }
 .icon {
-    color: rgb(32, 213, 236);
+    color: var(--tick-color);
     font-size: 1.4rem;
     margin: 0 0 4px 4px;
 }
 .name {
-    color: rgba(22, 24, 35, 0.75);
+    color: var(--text-color-gray);
     font-size: 1.2rem;
     font-weight: 500;
     line-height: 1.5rem;
 }
 .name.medium {
     font-weight: 500;
-    color: black;
+    color: var(--text-color-black);
     font-size: 1.4rem;
     padding: 4px 0;
 }
@@ -82,7 +84,7 @@
     margin-right: 4px;
 }
 .bio {
-    border-top: 1px solid rgba(22, 24, 35, 0.12);
+    border-top: 1px solid var(--border-color);
     font-size: 1.4rem;
     font-weight: 400;
     padding-top: 12px;

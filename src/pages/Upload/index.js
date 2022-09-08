@@ -134,6 +134,7 @@ function Upload() {
                                             <source src="" />
                                         </video>
                                     </div>
+
                                     <div className={cx('cover-video')}></div>
                                 </div>
                             </div>
