@@ -125,7 +125,7 @@ function Header() {
             {login ? <ModalOverlay setLogin={setLogin} /> : ''}
             <div className={cx('inner')}>
                 <Link to="/" className={cx('logo-link')}>
-                    <img className={cx('logo-image')} src={images.logo} onClick={handleReload} alt="Tiktok" />
+                    <img className={cx('logo-image')} src={images.logo} alt="Tiktok" />
                 </Link>
 
                 {/* search */}

@@ -3,13 +3,13 @@ import AccountItem from './AccountItem';
 import PropTypes from 'prop-types';
 
 import styles from './SuggestAccounts.module.scss';
-import { useEffect, useState, memo } from 'react';
+import { useEffect, useState } from 'react';
 
 const cx = classNames.bind(styles);
 
 function SuggestAccounts({ label, data = [], onViewChange, seeMore }) {
     const [isFollowBtn, setIsFollowBtn] = useState(false);
-    console.log('test');
+
     useEffect(() => {
         if (label === 'Following accounts') {
             setIsFollowBtn(true);

@@ -79,7 +79,7 @@ function Sidebar({ medium }) {
     const HandleLogin = () => {
         setLogin(true);
     };
-    console.log('hello');
+
     return (
         <div className={cx('wrapper', medium && 'medium')}>
             {login ? <ModalOverlay setLogin={setLogin} /> : ''}
